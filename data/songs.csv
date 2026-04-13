@@ -1,11 +1,19 @@
-id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
-1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18
-2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71
-3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10
-4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86
-5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05
-6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92
-7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89
-8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
-9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
-10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness,popularity,release_decade,instrumentalness,liveness,speechiness
+1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18,78,2020,0.05,0.12,0.04
+2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71,62,2020,0.85,0.08,0.03
+3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10,71,2010,0.02,0.28,0.06
+4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86,55,2020,0.92,0.07,0.03
+5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05,85,2020,0.01,0.15,0.08
+6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92,41,2020,0.88,0.06,0.04
+7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89,48,2010,0.35,0.42,0.07
+8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22,67,2010,0.72,0.09,0.03
+9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78,59,2020,0.91,0.06,0.04
+10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35,73,2020,0.04,0.18,0.05
+11,Street Sage,Lace & Gold,hip-hop,confident,0.78,95,0.72,0.84,0.08,82,2020,0.01,0.11,0.28
+12,Nocturne in Rain,Aria Voss,classical,melancholic,0.22,58,0.30,0.25,0.97,35,2000,0.96,0.14,0.04
+13,Slow Burn,Velvet Tide,r&b,romantic,0.55,88,0.73,0.71,0.42,76,2020,0.08,0.12,0.09
+14,Drop Zone,Circuit Fuse,edm,euphoric,0.97,140,0.88,0.95,0.03,88,2020,0.69,0.22,0.05
+15,Gravel Road Home,Dusty Pine,country,nostalgic,0.48,102,0.62,0.58,0.74,52,2010,0.06,0.25,0.06
+16,Island Echo,Sun & Tides,reggae,uplifting,0.61,86,0.85,0.77,0.55,44,2010,0.14,0.33,0.08
+17,Iron Curtain,Greywall,metal,aggressive,0.98,165,0.32,0.48,0.04,61,2010,0.04,0.35,0.05
+18,Empty Porch,Cedar Blue,folk,sad,0.25,68,0.28,0.35,0.91,38,2000,0.18,0.29,0.05
