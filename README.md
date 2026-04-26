@@ -15,16 +15,16 @@ A content-based music recommendation system extended with four applied AI featur
 
 ## What Was Added (New Features)
 
-| Feature | File | Description | API Key? |
-|---|---|---|---|
-| RAG Pipeline | `src/rag.py` | Natural language query → scores catalog → Claude explains picks | Yes |
-| Agentic Loop | `src/agent.py` | Auto-selects scoring mode, checks quality ≥ 0.55, retries if needed | No |
-| Specialist Assistant | `src/music_assistant.py` | Claude with full catalog in system prompt, answers music questions | Yes |
-| Reliability Tests | `tests/test_reliability.py` | 18 automated tests: determinism, bounds, diversity, edge cases | No |
-| Eval Harness *(stretch)* | `scripts/run_eval.py` | 10-profile pass/fail table with confidence scores | No |
-| RAG Enhancement *(stretch)* | `src/rag.py` + `data/genre_context.md` | Adds domain knowledge as a second retrieval source | Yes |
-| Specialization Enhancement *(stretch)* | `src/music_assistant.py` | Few-shot examples enforce structured response format | Yes |
-| Agentic Enhancement *(stretch)* | `src/agent_enhanced.py` | Claude drives tool-use loop with observable intermediate steps | Yes |
+| Feature | File | Description |
+|---|---|---|
+| RAG Pipeline | `src/rag.py` | Natural language query → scores catalog → Claude explains picks |
+| Agentic Loop | `src/agent.py` | Auto-selects scoring mode, checks quality ≥ 0.55, retries if needed |
+| Specialist Assistant | `src/music_assistant.py` | Claude with full catalog in system prompt, answers music questions |
+| Reliability Tests | `tests/test_reliability.py` | 18 automated tests: determinism, bounds, diversity, edge cases |
+| Eval Harness *(stretch)* | `scripts/run_eval.py` | 10-profile pass/fail table with confidence scores |
+| RAG Enhancement *(stretch)* | `src/rag.py` + `data/genre_context.md` | Adds domain knowledge as a second retrieval source |
+| Specialization Enhancement *(stretch)* | `src/music_assistant.py` | Few-shot examples enforce structured response format |
+| Agentic Enhancement *(stretch)* | `src/agent_enhanced.py` | Claude drives tool-use loop with observable intermediate steps |
 
 ---
 
