@@ -62,6 +62,21 @@ PROFILES: Dict[str, Dict] = {
 
 ACTIVE_PROFILE = "pop / happy"   # change this to switch profiles
 
+# ---------------------------------------------------------------------------
+# Feature demos — set DEMO_AI_FEATURES = True and provide ANTHROPIC_API_KEY
+# to run the 4 AI feature demonstrations after the main recommendation table.
+# ---------------------------------------------------------------------------
+
+DEMO_AI_FEATURES = False  # flip to True to run all 4 feature demos
+
+try:
+    from src.rag import rag_recommend
+    from src.agent import RecommendationAgent
+    from src.music_assistant import MusicAssistant
+    _AI_MODULES_AVAILABLE = True
+except ImportError:
+    _AI_MODULES_AVAILABLE = False
+
 
 # ---------------------------------------------------------------------------
 # Challenge 4 — Display helpers
@@ -172,6 +187,94 @@ def display_mode_comparison(
 
 
 # ---------------------------------------------------------------------------
+# Feature demos (Features 1–4)
+# ---------------------------------------------------------------------------
+
+def demo_features(catalog_path: str, songs: list) -> None:
+    """Run all 4 AI feature demonstrations. Requires ANTHROPIC_API_KEY."""
+    import os
+    if not _AI_MODULES_AVAILABLE:
+        print("\n[Demo] Could not import AI modules. Run: pip install anthropic\n")
+        return
+    if not os.getenv("ANTHROPIC_API_KEY"):
+        print("\n[Demo] Set ANTHROPIC_API_KEY to run the AI feature demos.\n")
+        return
+
+    user_prefs = PROFILES[ACTIVE_PROFILE]
+    sep = "=" * 62
+
+    print(f"\n{sep}")
+    print("  AI FEATURE DEMOS")
+    print(sep)
+
+    # ------------------------------------------------------------------
+    # Feature 1: Retrieval-Augmented Generation
+    # ------------------------------------------------------------------
+    print("\n[Feature 1] RAG — Retrieval-Augmented Generation")
+    print("-" * 40)
+    query = "upbeat songs for working out at the gym"
+    print(f"  Natural language query: \"{query}\"")
+    try:
+        result = rag_recommend(query, catalog_path, k=3)
+        print(f"\n  Claude's response:\n  {result}\n")
+    except Exception as exc:
+        print(f"  Error: {exc}\n")
+
+    # ------------------------------------------------------------------
+    # Feature 2: Agentic Workflow
+    # ------------------------------------------------------------------
+    print("[Feature 2] Agentic Workflow — plan → act → check → adjust")
+    print("-" * 40)
+    print(f"  Profile: {ACTIVE_PROFILE}")
+    agent = RecommendationAgent(songs, max_iterations=3)
+    outcome = agent.run(user_prefs, k=TOP_K)
+    print(f"\n  {outcome['verdict']}")
+    print(f"\n  Iteration trace:")
+    for r in outcome["trace"]:
+        print(
+            f"    iter {r['iteration']}: mode={r['mode']:<16} "
+            f"score={r['score']:.2f}  "
+            f"genre_hit={r['genre_hit_rate']:.0%}  "
+            f"energy_fit={r['energy_fit']:.2f}"
+        )
+    print(f"\n  Top picks (final mode: {outcome['final_mode']}):")
+    for i, (song, score, _) in enumerate(outcome["recommendations"][:3], 1):
+        print(f"    {i}. {song['title']} — {song['genre']}, score {score:.2f}")
+    print()
+
+    # ------------------------------------------------------------------
+    # Feature 3: Specialized / Fine-Tuned Model
+    # ------------------------------------------------------------------
+    print("[Feature 3] Specialized Model — WaveSort AI expert")
+    print("-" * 40)
+    question = "What is the best song for a late-night coding session, and why?"
+    print(f"  Question: \"{question}\"")
+    try:
+        assistant = MusicAssistant(catalog_path)
+        answer = assistant.ask(question)
+        print(f"\n  WaveSort AI:\n  {answer}\n")
+    except Exception as exc:
+        print(f"  Error: {exc}\n")
+
+    # ------------------------------------------------------------------
+    # Feature 4: Reliability Testing
+    # ------------------------------------------------------------------
+    print("[Feature 4] Reliability Testing")
+    print("-" * 40)
+    print("  Run the test suite to verify all reliability checks:")
+    print("    pytest tests/test_reliability.py -v")
+    print()
+    print("  Checks included:")
+    print("    - Determinism: same input → same ranked output")
+    print("    - Score bounds: no score exceeds the mode maximum")
+    print("    - Diversity: artist/genre caps enforced")
+    print("    - Mode behavior: genre_first > balanced on genre matches")
+    print("    - Regression: known profiles produce known top songs")
+    print("    - Edge cases: empty catalog, k > catalog size, unknown genre")
+    print()
+
+
+# ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
 
@@ -196,6 +299,10 @@ def main() -> None:
 
     # Mode comparison — shows how rankings shift when you change the strategy
     display_mode_comparison(user_prefs, songs, ACTIVE_PROFILE)
+
+    # AI feature demos — runs when DEMO_AI_FEATURES = True
+    if DEMO_AI_FEATURES:
+        demo_features(catalog_path, songs)
 
 
 if __name__ == "__main__":
